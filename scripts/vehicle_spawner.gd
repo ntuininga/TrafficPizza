@@ -26,3 +26,11 @@ func _spawn_vehicle():
 
 func _on_vehicle_spawn_timer_timeout():
 	_spawn_vehicle()
+
+
+func _on_main_game_over() -> void:
+	print("Stopping spawner")
+	$VehicleSpawnTimer.stop()
+	for child in get_children():
+		if child.is_in_group("vehicles"):
+			child.queue_free()

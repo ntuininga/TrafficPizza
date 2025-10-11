@@ -9,6 +9,7 @@ const MAX_TURN_ANGLE = 25
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	connect("area_entered", Callable(self, "_on_area_entered"))
 	
 
 func start(pos):
@@ -38,6 +39,8 @@ func _process(delta):
 
 
 
-func _on_body_entered(body):
-	vehicle_hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
+func _on_area_entered(area: Area2D) -> void:
+	print("area entered")
+	if area.is_in_group("vehicles"):
+		vehicle_hit.emit()
+		$CollisionShape2D.set_deferred("disabled", true)
