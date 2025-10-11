@@ -5,10 +5,11 @@ signal vehicle_hit
 @export var speed = 400
 @export var rotation_speed = 5
 var screen_size
-const MAX_TURN_ANGLE = 20
+const MAX_TURN_ANGLE = 25
 
 func _ready():
 	screen_size = get_viewport_rect().size
+	connect("area_entered", Callable(self, "_on_area_entered"))
 	
 
 func start(pos):
@@ -31,13 +32,15 @@ func _process(delta):
 	else: 
 		rotate_speed = 10
 
-	position += velocity * delta * speed
+	position += velocity * delta * speed * abs(rotation)
 	position = position.clamp(Vector2.ZERO, screen_size)
 
 	rotation = lerp_angle(rotation, target_angle, rotate_speed * delta)
 
 
 
-func _on_body_entered(body):
-	vehicle_hit.emit()
-	$CollisionShape2D.set_deferred("disabled", true)
+func _on_area_entered(area: Area2D) -> void:
+	print("area entered")
+	if area.is_in_group("vehicles"):
+		vehicle_hit.emit()
+		$CollisionShape2D.set_deferred("disabled", true)
