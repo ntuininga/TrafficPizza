@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dgus3mwx5hvq1"
-path="res://.godot/imported/Purple Sedan.png-b0eda813ae7ef07331038ae88ee0b9c5.ctex"
+uid="uid://dd7lyn7bql7pw"
+path="res://.godot/imported/Street.png-884487c916c8207a4c2e55dd932beaad.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Purple Sedan.png"
-dest_files=["res://.godot/imported/Purple Sedan.png-b0eda813ae7ef07331038ae88ee0b9c5.ctex"]
+source_file="res://art/Street.png"
+dest_files=["res://.godot/imported/Street.png-884487c916c8207a4c2e55dd932beaad.ctex"]
 
 [params]
 

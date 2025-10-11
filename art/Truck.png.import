@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://lhejmn50gtkc"
-path="res://.godot/imported/Truck.png-774438e48d0af39cf5345ae3aa1af7ae.ctex"
+path="res://.godot/imported/Truck.png-9310d0b79d842958209d33deab86ca84.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Truck.png"
-dest_files=["res://.godot/imported/Truck.png-774438e48d0af39cf5345ae3aa1af7ae.ctex"]
+source_file="res://art/Truck.png"
+dest_files=["res://.godot/imported/Truck.png-9310d0b79d842958209d33deab86ca84.ctex"]
 
 [params]
 

@@ -5,7 +5,7 @@ signal vehicle_hit
 @export var speed = 400
 @export var rotation_speed = 5
 var screen_size
-const MAX_TURN_ANGLE = 20
+const MAX_TURN_ANGLE = 25
 
 func _ready():
 	screen_size = get_viewport_rect().size
@@ -31,7 +31,7 @@ func _process(delta):
 	else: 
 		rotate_speed = 10
 
-	position += velocity * delta * speed
+	position += velocity * delta * speed * abs(rotation)
 	position = position.clamp(Vector2.ZERO, screen_size)
 
 	rotation = lerp_angle(rotation, target_angle, rotate_speed * delta)

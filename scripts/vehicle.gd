@@ -5,6 +5,7 @@ extends Area2D
 
 func _ready():
 	direction = Vector2.DOWN
+	$Sprite2D.flip_v = true
 
 func _process(delta):
 	position += direction.normalized() * speed * delta

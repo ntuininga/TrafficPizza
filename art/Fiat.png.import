@@ -3,15 +3,15 @@
 importer="texture"
 type="CompressedTexture2D"
 uid="uid://ds7k1tiwxayr6"
-path="res://.godot/imported/Fiat.png-02464a7845b2407fe115a66fd4418478.ctex"
+path="res://.godot/imported/Fiat.png-b16331df0c46b133c4efdd01a8a42352.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Assets/Fiat.png"
-dest_files=["res://.godot/imported/Fiat.png-02464a7845b2407fe115a66fd4418478.ctex"]
+source_file="res://art/Fiat.png"
+dest_files=["res://.godot/imported/Fiat.png-b16331df0c46b133c4efdd01a8a42352.ctex"]
 
 [params]
 
