@@ -1,7 +1,7 @@
 extends Node2D
 
 @export var vehicle: PackedScene
-@export var spawn_width: int = 400  # Default value, customizable in editor
+@export var spawn_width: int = 400 
 
 var screen_size: Vector2
 
@@ -16,7 +16,7 @@ func _spawn_vehicle():
 		return
 
 	var x_location = randf_range(-spawn_width / 2.0, spawn_width / 2.0)
-	var spawn_location = Vector2(screen_size.x / 2 + x_location, -screen_size.y)
+	var spawn_location = Vector2(screen_size.x / 2 + x_location, -100)
 
 	var vehicle_instance = vehicle.instantiate()
 	vehicle_instance.global_position = spawn_location

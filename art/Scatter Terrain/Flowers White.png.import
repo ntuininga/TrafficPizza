@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dd7lyn7bql7pw"
-path="res://.godot/imported/Street.png-884487c916c8207a4c2e55dd932beaad.ctex"
+uid="uid://c63gaq7qwno7m"
+path="res://.godot/imported/Flowers White.png-ec0363751c145db7c2c06fdbfdf71ee1.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://art/Street.png"
-dest_files=["res://.godot/imported/Street.png-884487c916c8207a4c2e55dd932beaad.ctex"]
+source_file="res://art/Scatter Terrain/Flowers White.png"
+dest_files=["res://.godot/imported/Flowers White.png-ec0363751c145db7c2c06fdbfdf71ee1.ctex"]
 
 [params]
 
