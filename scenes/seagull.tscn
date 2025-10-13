@@ -1,0 +1,72 @@
+[gd_scene load_steps=9 format=3 uid="uid://iy5wpjemqa50"]
+
+[ext_resource type="Script" uid="uid://cy16stxnj67l2" path="res://scripts/seagull.gd" id="1_8xdhb"]
+[ext_resource type="Texture2D" uid="uid://bpimalwl7bhp3" path="res://art/Scatter Terrain/Seagull Animation.png" id="1_htak3"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_8xdhb"]
+atlas = ExtResource("1_htak3")
+region = Rect2(0, 0, 10, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_or5sd"]
+atlas = ExtResource("1_htak3")
+region = Rect2(10, 0, 10, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_su3vp"]
+atlas = ExtResource("1_htak3")
+region = Rect2(20, 0, 10, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_p8mmu"]
+atlas = ExtResource("1_htak3")
+region = Rect2(30, 0, 10, 15)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_vo4ly"]
+atlas = ExtResource("1_htak3")
+region = Rect2(40, 0, 10, 15)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_pn0y6"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_8xdhb")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or5sd")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_su3vp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8mmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_vo4ly")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_p8mmu")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_su3vp")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_or5sd")
+}],
+"loop": false,
+"name": &"Flap",
+"speed": 15.0
+}]
+
+[node name="Seagull" type="Area2D"]
+script = ExtResource("1_8xdhb")
+speed = 100
+
+[node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
+scale = Vector2(3, 3)
+sprite_frames = SubResource("SpriteFrames_pn0y6")
+animation = &"Flap"
+frame = 7
+frame_progress = 1.0
+
+[node name="FlapTimer" type="Timer" parent="."]
+
+[connection signal="animation_finished" from="AnimatedSprite2D" to="." method="_on_animated_sprite_2d_animation_finished"]
+[connection signal="timeout" from="FlapTimer" to="." method="_on_flap_timer_timeout"]

@@ -4,6 +4,7 @@ signal vehicle_hit
 
 @export var speed = 400
 @export var rotation_speed = 5
+@onready var animated_sprite = $AnimatedSprite2D
 var screen_size
 const MAX_TURN_ANGLE = 25
 
@@ -22,6 +23,11 @@ func _process(delta):
 	var target_angle = 0.0
 	var rotate_speed = rotation_speed
 
+	if Input.is_action_just_pressed("move_left"):
+		animated_sprite.play("turn_left")
+	if Input.is_action_just_pressed("move_right"):
+		animated_sprite.play("turn_right")
+
 	# Handle input and movement
 	if Input.is_action_pressed("move_right"):
 		velocity.x += 1
@@ -31,6 +37,8 @@ func _process(delta):
 		target_angle = deg_to_rad(-MAX_TURN_ANGLE)
 	else: 
 		rotate_speed = 10
+		if animated_sprite.animation != "default":
+			animated_sprite.play("default")
 
 	position += velocity * delta * speed * abs(rotation)
 	position = position.clamp(Vector2.ZERO, screen_size)

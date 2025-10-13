@@ -1,11 +1,13 @@
-[gd_scene load_steps=7 format=3 uid="uid://bj5qw0bmthcai"]
+[gd_scene load_steps=9 format=3 uid="uid://bj5qw0bmthcai"]
 
 [ext_resource type="Script" uid="uid://sumww5fg5g5y" path="res://scripts/main.gd" id="1_0wfyh"]
 [ext_resource type="PackedScene" uid="uid://ca588slschb34" path="res://scenes/player.tscn" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://bvwcmlhcae8w6" path="res://scripts/vehicle_spawner.gd" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://c0mwvfq1sa1og" path="res://scenes/vehicle.tscn" id="4_jyhfs"]
+[ext_resource type="Script" uid="uid://cvfyjl6y3gjfm" path="res://scripts/seagull_spawner.gd" id="5_o6xl0"]
 [ext_resource type="Script" uid="uid://byr6rm1y6ymoh" path="res://scripts/background_scroll.gd" id="6_tefeu"]
 [ext_resource type="PackedScene" uid="uid://crlesg4gn3snp" path="res://scenes/background.tscn" id="7_o6xl0"]
+[ext_resource type="PackedScene" uid="uid://iy5wpjemqa50" path="res://scenes/seagull.tscn" id="7_tipki"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0wfyh")
@@ -16,13 +18,6 @@ scale = Vector2(1.5, 1.5)
 speed = 600
 rotation_speed = 10
 
-[node name="VehicleSpawner" type="Node2D" parent="."]
-script = ExtResource("3_sugp2")
-vehicle = ExtResource("4_jyhfs")
-
-[node name="VehicleSpawnTimer" type="Timer" parent="VehicleSpawner"]
-autostart = true
-
 [node name="StartPosition" type="Marker2D" parent="."]
 position = Vector2(225, 564)
 
@@ -32,5 +27,21 @@ script = ExtResource("6_tefeu")
 scroll_speed = 200.0
 tilemap_base = ExtResource("7_o6xl0")
 
-[connection signal="game_over" from="." to="VehicleSpawner" method="_on_main_game_over"]
-[connection signal="timeout" from="VehicleSpawner/VehicleSpawnTimer" to="VehicleSpawner" method="_on_vehicle_spawn_timer_timeout"]
+[node name="Spawners" type="Node2D" parent="."]
+
+[node name="Seagull Spawner" type="Node2D" parent="Spawners"]
+script = ExtResource("5_o6xl0")
+seagull_scene = ExtResource("7_tipki")
+
+[node name="SeagullSpawnTimer" type="Timer" parent="Spawners/Seagull Spawner"]
+
+[node name="VehicleSpawner" type="Node2D" parent="Spawners"]
+script = ExtResource("3_sugp2")
+vehicle = ExtResource("4_jyhfs")
+
+[node name="VehicleSpawnTimer" type="Timer" parent="Spawners/VehicleSpawner"]
+autostart = true
+
+[connection signal="game_over" from="." to="Spawners/VehicleSpawner" method="_on_main_game_over"]
+[connection signal="timeout" from="Spawners/Seagull Spawner/SeagullSpawnTimer" to="Spawners/Seagull Spawner" method="_on_seagull_spawn_timer_timeout"]
+[connection signal="timeout" from="Spawners/VehicleSpawner/VehicleSpawnTimer" to="Spawners/VehicleSpawner" method="_on_vehicle_spawn_timer_timeout"]
