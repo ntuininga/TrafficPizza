@@ -4,9 +4,9 @@
 [ext_resource type="PackedScene" uid="uid://ca588slschb34" path="res://scenes/player.tscn" id="2_sugp2"]
 [ext_resource type="Script" uid="uid://bvwcmlhcae8w6" path="res://scripts/vehicle_spawner.gd" id="3_sugp2"]
 [ext_resource type="PackedScene" uid="uid://c0mwvfq1sa1og" path="res://scenes/vehicle.tscn" id="4_jyhfs"]
+[ext_resource type="PackedScene" uid="uid://b0j3smo2tp4wv" path="res://scenes/tile_map_layer.tscn" id="4_tipki"]
 [ext_resource type="Script" uid="uid://cvfyjl6y3gjfm" path="res://scripts/seagull_spawner.gd" id="5_o6xl0"]
 [ext_resource type="Script" uid="uid://byr6rm1y6ymoh" path="res://scripts/background_scroll.gd" id="6_tefeu"]
-[ext_resource type="PackedScene" uid="uid://crlesg4gn3snp" path="res://scenes/background.tscn" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://iy5wpjemqa50" path="res://scenes/seagull.tscn" id="7_tipki"]
 
 [node name="Main" type="Node2D"]
@@ -15,7 +15,7 @@ script = ExtResource("1_0wfyh")
 [node name="Player" parent="." instance=ExtResource("2_sugp2")]
 position = Vector2(226, 563)
 scale = Vector2(1.5, 1.5)
-speed = 600
+speed = 350
 rotation_speed = 10
 
 [node name="StartPosition" type="Marker2D" parent="."]
@@ -24,7 +24,7 @@ position = Vector2(225, 564)
 [node name="Background" type="Node2D" parent="."]
 z_index = -1
 script = ExtResource("6_tefeu")
-tilemap_base = ExtResource("7_o6xl0")
+tilemap_base = ExtResource("4_tipki")
 
 [node name="Spawners" type="Node2D" parent="."]
 

@@ -73,7 +73,8 @@ animations = [{
 "speed": 8.0
 }]
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="CharacterBody2D"]
+collision_mask = 3
 script = ExtResource("1_p0vlq")
 
 [node name="Sprite2D" type="Sprite2D" parent="."]

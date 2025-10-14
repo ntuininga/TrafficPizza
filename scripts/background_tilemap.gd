@@ -1,8 +1,8 @@
-extends TileMap
+extends TileMapLayer
 
 var screen_size : Vector2
 var origninal_tile_size : float
-var number_of_lanes = 6
+var number_of_lanes = 12
 var grid_size : Vector2i
 
 #Setting atlas coords for different tiles
@@ -27,10 +27,13 @@ func _get_number_of_tiles():
 	print("Tile width should be %s" % [tile_width])
 	
 	#Tile grid size should be rounded to whole number above its value
-	grid_size = Vector2(ceil(screen_size.x / tile_width), ceil(screen_size.y / tile_width))	
+	grid_size = Vector2(ceil(screen_size.x / tile_width), ceil(screen_size.y / tile_width))
+	var total_width = tile_width * grid_size.x
+	print("Total width %s, Screen width %s", [total_width, screen_size.x])
+	var should_be_moved = (screen_size.x - total_width)
 	#If Tile grid size is an even number shift over to be centred
 	if int(grid_size.x) % 2 == 0:
-		position.x -= tile_width / 2
+		position.x += should_be_moved
 	
 	#amount to scale up
 	var scale_amount = int(tile_width / origninal_tile_size)
@@ -38,10 +41,15 @@ func _get_number_of_tiles():
 	scale = Vector2(scale_amount, scale_amount)
 
 func _build_basic_background():
+	var alt_tile = 0
 	for y in range(grid_size.y):
 		for x in range(grid_size.x):
+			alt_tile = 0
 			var tile = empty_road_tile
-			if x == 0 or x == grid_size.x - 1:
+			if x == 0:
+				tile = edge_tile
+				alt_tile = 1
+			if x == grid_size.x - 1:
 				tile = edge_tile
 			
-			set_cell(0, Vector2i(x,y), source_id, tile)
+			set_cell(Vector2i(x,y),source_id, tile, alt_tile)

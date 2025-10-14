@@ -1,4 +1,4 @@
-extends Area2D
+extends CharacterBody2D
 
 signal vehicle_hit
 
@@ -10,7 +10,7 @@ const MAX_TURN_ANGLE = 25
 
 func _ready():
 	screen_size = get_viewport_rect().size
-	connect("area_entered", Callable(self, "_on_area_entered"))
+	#connect("area_entered", Callable(self, "_on_area_entered"))
 	
 
 func start(pos):
@@ -18,8 +18,8 @@ func start(pos):
 	show()
 	$CollisionShape2D.disabled = false
 
-func _process(delta):
-	var velocity = Vector2.ZERO
+func _physics_process(delta):
+	var input = Input.get_action_strength("move_right") - Input.get_action_strength("move_left")
 	var target_angle = 0.0
 	var rotate_speed = rotation_speed
 
@@ -28,27 +28,26 @@ func _process(delta):
 	if Input.is_action_just_pressed("move_right"):
 		animated_sprite.play("turn_right")
 
+	velocity.x = input * speed
+	velocity.y = 0
+	
 	# Handle input and movement
 	if Input.is_action_pressed("move_right"):
-		velocity.x += 1
 		target_angle = deg_to_rad(MAX_TURN_ANGLE)
 	elif Input.is_action_pressed("move_left"):
-		velocity.x -= 1
 		target_angle = deg_to_rad(-MAX_TURN_ANGLE)
 	else: 
 		rotate_speed = 10
 		if animated_sprite.animation != "default":
 			animated_sprite.play("default")
-
-	position += velocity * delta * speed * abs(rotation)
-	position = position.clamp(Vector2.ZERO, screen_size)
+	move_and_slide()
 
 	rotation = lerp_angle(rotation, target_angle, rotate_speed * delta)
 
 
 
-func _on_area_entered(area: Area2D) -> void:
+func _on_body_entered(body) -> void:
 	print("area entered")
-	if area.is_in_group("vehicles"):
+	if body.is_in_group("vehicles"):
 		vehicle_hit.emit()
 		$CollisionShape2D.set_deferred("disabled", true)

@@ -1,0 +1,53 @@
+[gd_scene load_steps=5 format=3 uid="uid://b0j3smo2tp4wv"]
+
+[ext_resource type="Texture2D" uid="uid://mbhndvch5ldq" path="res://art/Background/Background Tileset.png" id="1_okeva"]
+[ext_resource type="Script" uid="uid://cqwrk8ixnw5cs" path="res://scripts/background_tilemap.gd" id="1_wipo8"]
+
+[sub_resource type="TileSetAtlasSource" id="TileSetAtlasSource_o3fi6"]
+texture = ExtResource("1_okeva")
+0:0/0 = 0
+1:0/0 = 0
+2:0/0 = 0
+3:0/0 = 0
+4:0/next_alternative_id = 2
+4:0/0 = 0
+4:0/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -8, 8, -8, 8, 8, 0.17985916, 8)
+4:0/1 = 1
+4:0/1/flip_h = true
+4:0/1/physics_layer_0/polygon_0/points = PackedVector2Array(-8, -8, 0, -8, -0.10152626, 8, -8, 8)
+5:0/0 = 0
+6:0/0 = 0
+7:0/0 = 0
+0:1/0 = 0
+1:1/0 = 0
+2:1/0 = 0
+3:1/0 = 0
+4:1/0 = 0
+4:1/0/physics_layer_0/polygon_0/points = PackedVector2Array(0, -8, 8, -8, 8, 8, 0, 8)
+5:1/0 = 0
+6:1/0 = 0
+7:1/0 = 0
+1:2/0 = 0
+2:2/0 = 0
+3:2/0 = 0
+4:2/0 = 0
+5:2/0 = 0
+6:2/0 = 0
+7:2/0 = 0
+3:3/0 = 0
+4:3/0 = 0
+5:3/0 = 0
+6:3/0 = 0
+7:3/0 = 0
+4:4/0 = 0
+5:4/0 = 0
+6:4/0 = 0
+7:4/0 = 0
+
+[sub_resource type="TileSet" id="TileSet_t43m4"]
+physics_layer_0/collision_layer = 1
+sources/0 = SubResource("TileSetAtlasSource_o3fi6")
+
+[node name="TileMapLayer" type="TileMapLayer"]
+tile_set = SubResource("TileSet_t43m4")
+script = ExtResource("1_wipo8")
