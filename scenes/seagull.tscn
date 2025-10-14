@@ -56,8 +56,9 @@ animations = [{
 }]
 
 [node name="Seagull" type="Area2D"]
+top_level = true
 script = ExtResource("1_8xdhb")
-speed = 100
+speed = 75
 
 [node name="AnimatedSprite2D" type="AnimatedSprite2D" parent="."]
 scale = Vector2(3, 3)
