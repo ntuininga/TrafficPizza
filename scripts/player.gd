@@ -42,6 +42,7 @@ func _physics_process(delta):
 			animated_sprite.play("default")
 	move_and_slide()
 
+	position.x = clamp(position.x, 0, screen_size.x)
 	rotation = lerp_angle(rotation, target_angle, rotate_speed * delta)
 
 

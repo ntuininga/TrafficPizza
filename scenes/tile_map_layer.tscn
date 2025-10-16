@@ -7,7 +7,10 @@
 texture = ExtResource("1_okeva")
 0:0/0 = 0
 1:0/0 = 0
+2:0/next_alternative_id = 3
 2:0/0 = 0
+2:0/1 = 1
+2:0/1/flip_h = true
 3:0/0 = 0
 4:0/next_alternative_id = 2
 4:0/0 = 0

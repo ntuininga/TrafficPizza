@@ -2,19 +2,27 @@ extends TileMapLayer
 
 var screen_size : Vector2
 var origninal_tile_size : float
-var number_of_lanes = 12
-var grid_size : Vector2i
+var number_of_lanes = 8
+#Grid size X should always be odd
+@export var grid_size = Vector2i(17, 0)
 
 #Setting atlas coords for different tiles
+var empty_grass_tile = Vector2i(1, 2)
+var edge_grass_tile = Vector2i(2, 0)
 var empty_road_tile = Vector2i(3, 0)
+var yellow_line_tile = Vector2i(3, 2)
+var dotted_line_tile = Vector2i(3, 1)
 var edge_tile = Vector2i(4,0)
 var source_id = 0
+
+var last_tile_place : Vector2i
 
 func _ready():
 	screen_size = get_viewport_rect().size
 	origninal_tile_size = tile_set.tile_size.y
 	print("Original tile size %s" % [origninal_tile_size])
-	_get_number_of_tiles()
+	_generate_grid()
+	#_get_number_of_tiles()
 	print("Grid size should be %s,%s" % [grid_size.x, grid_size.y])
 	_build_basic_background()
 	
@@ -22,12 +30,16 @@ func _ready():
 #Divide screen width by number of lanes + min 2 for side pieces
 #Determine scale up to reach the appropriate sizing for the screen
 func _get_number_of_tiles():
-	var target_tile_width = screen_size.x / (number_of_lanes + 2)
-	var tile_width = ceil(target_tile_width / origninal_tile_size) * origninal_tile_size
+	var tile_width = screen_size.x / (number_of_lanes + 2)
+	#var tile_width = ceil(target_tile_width / origninal_tile_size) * origninal_tile_size
+	#var tile_width = target_tile_width / origninal_tile_size
 	print("Tile width should be %s" % [tile_width])
 	
 	#Tile grid size should be rounded to whole number above its value
 	grid_size = Vector2(ceil(screen_size.x / tile_width), ceil(screen_size.y / tile_width))
+	if grid_size.x % 2 == 0:
+		grid_size.x += 1
+		grid_size.y += 1
 	var total_width = tile_width * grid_size.x
 	print("Total width %s, Screen width %s", [total_width, screen_size.x])
 	var should_be_moved = (screen_size.x - total_width)
@@ -40,16 +52,36 @@ func _get_number_of_tiles():
 	print(scale_amount)
 	scale = Vector2(scale_amount, scale_amount)
 
+func _generate_grid():
+	var tile_width = screen_size.x / grid_size.x
+	var y_tile_count = ceil(screen_size.y / tile_width)
+	grid_size = Vector2i(grid_size.x, y_tile_count)
+	var scale_amount = tile_width / origninal_tile_size
+	scale = Vector2(scale_amount, scale_amount)
+
+
+#Builds basic background with simple edge tiles 
+#Adds basic yellow centre line
 func _build_basic_background():
 	var alt_tile = 0
+	print (grid_size)
 	for y in range(grid_size.y):
 		for x in range(grid_size.x):
 			alt_tile = 0
 			var tile = empty_road_tile
 			if x == 0:
-				tile = edge_tile
+				tile = empty_grass_tile
+			elif x == grid_size.x - 1:
+				tile = empty_grass_tile
+			elif x == ceil(grid_size.x / 2) && last_tile_place == empty_road_tile:
+				tile = yellow_line_tile
+			elif x == grid_size.x - 2 :
+				tile = edge_grass_tile
 				alt_tile = 1
-			if x == grid_size.x - 1:
-				tile = edge_tile
-			
+			else:
+				if (last_tile_place == empty_road_tile):
+					tile = dotted_line_tile
+				elif (last_tile_place == empty_grass_tile):
+					tile = edge_grass_tile
+			last_tile_place = tile
 			set_cell(Vector2i(x,y),source_id, tile, alt_tile)
