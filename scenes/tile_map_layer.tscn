@@ -54,3 +54,6 @@ sources/0 = SubResource("TileSetAtlasSource_o3fi6")
 [node name="TileMapLayer" type="TileMapLayer"]
 tile_set = SubResource("TileSet_t43m4")
 script = ExtResource("1_wipo8")
+number_of_lanes = 20
+edge_tiles_left = 4
+edge_tiles_right = 4
