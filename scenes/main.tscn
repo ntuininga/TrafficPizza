@@ -6,25 +6,20 @@
 [ext_resource type="PackedScene" uid="uid://c0mwvfq1sa1og" path="res://scenes/vehicle.tscn" id="4_jyhfs"]
 [ext_resource type="PackedScene" uid="uid://b0j3smo2tp4wv" path="res://scenes/tile_map_layer.tscn" id="4_tipki"]
 [ext_resource type="Script" uid="uid://cvfyjl6y3gjfm" path="res://scripts/seagull_spawner.gd" id="5_o6xl0"]
-[ext_resource type="Script" uid="uid://byr6rm1y6ymoh" path="res://scripts/background_scroll.gd" id="6_tefeu"]
+[ext_resource type="Script" uid="uid://ch7c5jcjcowt5" path="res://scripts/background.gd" id="7_o6xl0"]
 [ext_resource type="PackedScene" uid="uid://iy5wpjemqa50" path="res://scenes/seagull.tscn" id="7_tipki"]
 
 [node name="Main" type="Node2D"]
 script = ExtResource("1_0wfyh")
 
 [node name="Player" parent="." instance=ExtResource("2_sugp2")]
-position = Vector2(226, 563)
+position = Vector2(0, 200)
 scale = Vector2(1.5, 1.5)
 speed = 350
 rotation_speed = 10
 
 [node name="StartPosition" type="Marker2D" parent="."]
-position = Vector2(225, 564)
-
-[node name="Background" type="Node2D" parent="."]
-z_index = -1
-script = ExtResource("6_tefeu")
-tilemap_base = ExtResource("4_tipki")
+position = Vector2(0, 200)
 
 [node name="Spawners" type="Node2D" parent="."]
 
@@ -40,6 +35,14 @@ vehicle = ExtResource("4_jyhfs")
 
 [node name="VehicleSpawnTimer" type="Timer" parent="Spawners/VehicleSpawner"]
 autostart = true
+
+[node name="Background" type="Node2D" parent="."]
+script = ExtResource("7_o6xl0")
+
+[node name="Camera2D" type="Camera2D" parent="Background"]
+zoom = Vector2(0.5, 0.5)
+
+[node name="TileMapLayer" parent="Background" instance=ExtResource("4_tipki")]
 
 [connection signal="game_over" from="." to="Spawners/VehicleSpawner" method="_on_main_game_over"]
 [connection signal="timeout" from="Spawners/Seagull Spawner/SeagullSpawnTimer" to="Spawners/Seagull Spawner" method="_on_seagull_spawn_timer_timeout"]

@@ -52,8 +52,7 @@ physics_layer_0/collision_layer = 1
 sources/0 = SubResource("TileSetAtlasSource_o3fi6")
 
 [node name="TileMapLayer" type="TileMapLayer"]
+z_index = -1
+scale = Vector2(2, 2)
 tile_set = SubResource("TileSet_t43m4")
 script = ExtResource("1_wipo8")
-number_of_lanes = 4
-opposing_lanes = 5
-with_lanes = 4
